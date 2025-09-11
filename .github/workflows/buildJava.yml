@@ -14,6 +14,6 @@ jobs:
         uses: actions/setup-java@v4
         with:
             distribution: "corretto"
-            version: "21"
+            java-version: "21"
       - name: build
         run: mvn –B package
