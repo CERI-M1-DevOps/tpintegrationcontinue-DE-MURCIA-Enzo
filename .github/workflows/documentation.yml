@@ -4,6 +4,8 @@ on :
     types:
       - closed
     branches: [main]
+permissions :
+  contents: write
 jobs :
   if_merged:
     if: github.event.pull_request.merged == true
@@ -11,12 +13,7 @@ jobs :
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Cache Maven packages
-        uses: actions/cache@v4
-        with:
-          path: ~/.m2/repository
-          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-      - name: Setup JDK
+      - name: SetupJava
         uses: actions/setup-java@v4
         with:
           distribution: 'corretto'
@@ -27,4 +24,3 @@ jobs :
         with :
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir : ./target/reports/apidocs
-          publish_branch: 'gh-pages'
