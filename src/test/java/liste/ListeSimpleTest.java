@@ -62,6 +62,12 @@ class ListeSimpleTest {
     }
 
     @Test
+    void modifiePremierListeVide() {
+        listeATester.modifiePremier(1, 2);
+        assertNull(listeATester.tete);
+    }
+
+    @Test
     void modifieTous() {
         listeATester.ajout(1);
         listeATester.ajout(2);
