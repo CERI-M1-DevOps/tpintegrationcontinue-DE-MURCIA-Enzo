@@ -119,8 +119,8 @@ class ListeSimpleTest {
     @Test
     void supprimePremierSuivantVide() {
         listeATester.ajout(1);
-        listeATester.supprimePremier(1);
-        assertNull(listeATester.tete);
+        listeATester.supprimePremier(2);
+        assertNull(listeATester.tete.getSuivant());
     }
 
     @Test
