@@ -1,0 +1,25 @@
+name : Documentation
+on :
+  pull_request:
+    types:
+      - closed
+    branches: [main]
+jobs :
+  if_merged:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: SetupJava
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'corretto'
+          java-version: '21'
+      - run:  mvn -B javadoc::javadoc
+      - name: 'Deploy documentation'
+        uses : peaceiris/actions-gh-pages@v4
+        with :
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir : ./target/reports/apidocs
+          publish_branch: 'gh-pages'
