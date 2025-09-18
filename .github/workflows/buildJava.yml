@@ -13,10 +13,8 @@ jobs:
       - name: Cache Maven packages
         uses: actions/cache@v4
         with:
-          path: |
-            ~/.maven/caches
-            ~/.maven/wrapper
-          key: '8'
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
